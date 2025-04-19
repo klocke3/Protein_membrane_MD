@@ -1,4 +1,4 @@
-# 🧬 membrane_preparation.py
+# 🧬 Preparação de uma membrana bilipídica contendo uma proteína utilizando o OpenMM
 
 Este script prepara uma estrutura de proteína inserida em uma **bicamada lipídica** (membrana) com **solvatação iônica**, usando o **OpenMM**. Ideal para simulações de dinâmica molecular com proteínas de membrana. Neste caso, será construída uma membrana no plano XY.
 
