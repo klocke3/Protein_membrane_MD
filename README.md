@@ -29,7 +29,16 @@ pip install openmm
 ```bash
 python membrane_preparation.py -i proteina.pdb -l LIPIDIO -m PADDING -c IONIC_STRENGTH
 ```
+---
+
 Argumentos:
+
+| Parâmetro       | Valor                 |
+|----------------|------------------------|
+| -i Proteína       | arquivo_input.pdb        |
+| -l Lipídio        | Código Lipídeo         |
+| -m Padding        | Ajuste tamanho da membrana nm |
+| -c Força Iônica   | Força iônica mol/L |
 
 ---
 
