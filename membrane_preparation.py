@@ -59,7 +59,7 @@ sys.stdout.flush()
 
 # Etapa 5: Salvar o arquivo PDB final
 loading_animation("Salvando estrutura final", 5)
-output_filename = Path(args.input).stem + "_membrana.pdb"
+output_filename = Path(args.input).stem + "_membrane.pdb"
 with open(output_filename, 'w') as f:
     PDBFile.writeFile(modeller.topology, modeller.positions, f)
 
