@@ -1,7 +1,9 @@
 # 🧬 membrane_preparation.py
 
 Este script prepara uma estrutura de proteína inserida em uma **bicamada lipídica** (membrana) com **solvatação iônica**, usando o **OpenMM**. Ideal para simulações de dinâmica molecular com proteínas de membrana. Neste caso, será construída uma membrana no plano XY.
+
 Para centralizar a proteína, use o servidor: https://opm.phar.umich.edu/ppm_server2
+
 Após gerar o arquivo pdb, faça o download e adicione na pasta contendo o arquivo membrane_preparation.py
 
 ---
