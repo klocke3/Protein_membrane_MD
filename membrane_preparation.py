@@ -1,51 +1,25 @@
 import argparse
 from openmm.app import PDBFile, Modeller, ForceField, Simulation
 from openmm import unit, app
-import os
+from pathlib import Path
 
-# === Argumentos de linha de comando ===
-parser = argparse.ArgumentParser(
-    description='🧬 Prepara uma proteína inserida em uma membrana lipídica solvatada usando OpenMM.'
-)
-
-parser.add_argument(
-    '-i', '--input', required=True,
-    help='🧾 Arquivo PDB da proteína (ex: aquaporina.pdb)'
-)
-
-parser.add_argument(
-    '-l', '--lipid', default='POPC',
-    help='🧫 Tipo de lipídeo da bicamada (ex: POPC, DPPC, POPE, etc). Padrão: POPC'
-)
-
-parser.add_argument(
-    '-m', '--minimumPadding', type=float, default=3.0,
-    help='📏 Distância mínima (em nm) entre a proteína e os lipídios. Padrão: 3.0 nm'
-)
-
-parser.add_argument(
-    '-c', '--ionicStrength', type=float, default=0.15,
-    help='🧪 Força iônica do sistema (em mol/L). Padrão: 0.15 M'
-)
-
+# Argumentos CLI
+parser = argparse.ArgumentParser(description="Prepara uma proteína em membrana com OpenMM.")
+parser.add_argument('-i', '--input', required=True, help='Arquivo PDB da proteína de entrada')
+parser.add_argument('-l', '--lipid', default='POPC', help='Tipo de lipídio (ex: POPC, DPPC)')
+parser.add_argument('-m', '--minimumPadding', type=float, default=1.0, help='Distância mínima (nm) entre proteína e membrana')
+parser.add_argument('-c', '--ionicStrength', type=float, default=0.15, help='Força iônica (mol/L)')
 args = parser.parse_args()
 
-# === Carregar a proteína do arquivo PDB ===
-print(f"📂 Carregando estrutura: {args.input}")
+# Carregar proteína
 pdb = PDBFile(args.input)
 modeller = Modeller(pdb.topology, pdb.positions)
 modeller.addHydrogens()
 
-# === Definir campos de força ===
-print(f"🧬 Aplicando força: amber14 + lipid17")
-forcefield = ForceField(
-    'amber14-all.xml',
-    'amber14/tip3p.xml',
-    'amber14/lipid17.xml'
-)
+# Campo de força
+forcefield = ForceField('amber14-all.xml', 'amber14/tip3p.xml', 'amber14/lipid17.xml')
 
-# === Inserir em membrana lipídica ===
-print(f"🧫 Adicionando membrana: {args.lipid}")
+# Adicionar membrana
 modeller.addMembrane(
     forcefield,
     lipidType=args.lipid,
@@ -57,20 +31,40 @@ modeller.addMembrane(
     neutralize=True
 )
 
-# === Criar sistema ===
-print("⚙️  Criando sistema com PME e restrições em ligações de hidrogênio...")
-system = forcefield.createSystem(
-    modeller.topology,
-    nonbondedMethod=app.PME,
-    nonbondedCutoff=1.0 * unit.nanometer,
-    constraints=app.HBonds
-)
+# Criar sistema
+system = forcefield.createSystem(modeller.topology, nonbondedMethod=app.PME,
+                                 nonbondedCutoff=1.0 * unit.nanometer, constraints=app.HBonds)
 
-# === Salvar saída ===
-base_name = os.path.splitext(os.path.basename(args.input))[0]
-output_filename = f"{base_name}_membrana.pdb"
-
+# Nome de saída
+output_filename = Path(args.input).stem + "_membrana.pdb"
 with open(output_filename, 'w') as f:
     PDBFile.writeFile(modeller.topology, modeller.positions, f)
 
-print(f"✅ Estrutura com membrana salva como: {output_filename}")
+print(f"✅ Estrutura salva como {output_filename}")
+
+# Criar README.md dinâmico
+readme = f"""# 🧬 Simulação com Membrana: {args.input}
+
+Este sistema foi preparado automaticamente com os seguintes parâmetros:
+
+| Parâmetro       | Valor                 |
+|----------------|------------------------|
+| Proteína       | `{args.input}`         |
+| Lipídio        | `{args.lipid}`         |
+| Padding        | `{args.minimumPadding} nm` |
+| Força Iônica   | `{args.ionicStrength} mol/L` |
+| Campo de força | `amber14-all + lipid17`|
+
+💾 Arquivo de saída: `{output_filename}`
+
+## 🧫 Descrição
+
+A proteína foi centralizada e inserida em uma bicamada lipídica do tipo `{args.lipid}` com uma margem de solvatação de `{args.minimumPadding} nm`, e a solução foi neutralizada com íons (Na⁺, Cl⁻) para uma força iônica de `{args.ionicStrength} M`.
+
+Para mais informações, consulte o [repositório do OpenMM](https://github.com/openmm/openmm/wiki/Membrane-Systems).
+"""
+
+with open("README.md", "w") as f:
+    f.write(readme)
+
+print("📘 README.md gerado com sucesso!")
