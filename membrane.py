@@ -18,7 +18,7 @@ modeller.addMembrane(
     forcefield,
     lipidType='DPPC',
     membraneCenterZ=0*unit.nanometer,
-    minimumPadding=1.0*unit.nanometer,
+    minimumPadding=2.0*unit.nanometer,
     positiveIon='Na+',
     negativeIon='Cl-',
     ionicStrength=0.15*unit.molar,
