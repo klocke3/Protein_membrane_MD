@@ -1,0 +1,63 @@
+from Bio import PDB
+
+def remover_agua_acima_z(pdb_file, z_min):
+    # Criar o objeto para ler o PDB
+    parser = PDB.PDBParser(QUIET=True)
+    structure = parser.get_structure("PDB", pdb_file)
+    
+    # Lista para armazenar os resíduos a serem removidos
+    residuos_remover = []
+
+    # Iterar pelas cadeias e resíduos da estrutura
+    for model in structure:
+        for chain in model:
+            for residue in chain:
+                # Verificar se o resíduo é água (HOH)
+                if residue.get_resname() == "HOH":
+                    # Obter os átomos O, H1 e H2 do resíduo
+                    atoms = list(residue.get_atoms())
+                    if len(atoms) >= 3:  # Para garantir que temos O, H1 e H2
+                        O_atom = atoms[0]  # O primeiro átomo geralmente é o O
+                        H1_atom = atoms[1]  # O segundo átomo geralmente é H1
+                        H2_atom = atoms[2]  # O terceiro átomo geralmente é H2
+                        
+                        # Obter a posição Z do átomo de oxigênio
+                        z_pos = O_atom.get_coord()[2]
+
+                        # Verificar se a posição Z é maior que o valor mínimo
+                        if z_pos > z_min:
+                            residuos_remover.append(residue)
+
+    # Criar uma nova estrutura sem as moléculas de água que precisam ser removidas
+    io = PDB.PDBIO()
+    io.set_structure(structure)
+    
+    # Filtrar os resíduos
+    def remove_residues(structure):
+        for model in structure:
+            for chain in model:
+                residues_to_remove = []
+                for residue in chain:
+                    if residue in residuos_remover:
+                        residues_to_remove.append(residue)
+                for residue in residues_to_remove:
+                    chain.detach_child(residue.get_id())
+
+    # Remover os resíduos selecionados
+    remove_residues(structure)
+    
+    # Salvar o novo arquivo PDB
+    output_file = pdb_file.replace(".pdb", "_modificado.pdb")
+    io.save(output_file)
+    print(f"Novo arquivo PDB salvo como: {output_file}")
+
+# Parâmetros
+pdb_file = "sistema.pdb"  # Caminho para o arquivo PDB de entrada
+z_min = 0  # Posição Z mínima acima da qual a água será removida
+
+# Chamada da função para remover as águas
+remover_agua_acima_z(pdb_file, z_min)
+
+
+
+
