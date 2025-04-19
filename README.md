@@ -45,7 +45,7 @@ Argumentos:
 
 ## Flag	Descrição	Exemplo
 ```
-python membrane_preparation.py -i aquaporina.pdb -l POPC -m 3.0 -c 0.15
+python membrane_preparation.py -i human_aquaporin_4CSK.pdb -l POPE -m 3.0 -c 0.15
 ```
 ## 🧫 Tipos de Lipídios Suportados
 
@@ -64,6 +64,6 @@ python membrane_preparation.py -i aquaporina.pdb -l POPC -m 3.0 -c 0.15
 
 ## 💾 Saída
 O script gera um arquivo .pdb com a estrutura da proteína embebida em uma membrana, solvatada e neutralizada, pronta para simulação.
-Exemplo de saída: proteina_membrana.pdb
+Exemplo de saída: protein_membrane.pdb
 
 
