@@ -45,7 +45,7 @@ Argumentos:
 
 ## Flag	Descrição	Exemplo
 ```
-python membrane_preparation.py -i human_aquaporin_4CSK.pdb -l POPE -m 3.0 -c 0.15
+python membrane_preparation.py -i human_aquaporin_4CSK.pdb -l POPE -m 1.0 -c 0
 ```
 ## 🧫 Tipos de Lipídios Suportados
 
