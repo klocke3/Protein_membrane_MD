@@ -49,18 +49,16 @@ python membrane_preparation.py -i aquaporina.pdb -l POPC -m 3.0 -c 0.15
 ```
 ## 🧫 Tipos de Lipídios Suportados
 
-| Código | Nome Completo                                           |
-|--------|----------------------------------------------------------|
-| POPC   | 1-palmitoil-2-oleoil-sn-glicero-3-fosfocolina            |
-| DPPC   | 1,2-dipalmitoil-sn-glicero-3-fosfocolina                 |
-| POPE   | 1-palmitoil-2-oleoil-sn-glicero-3-fosfoetanolamina       |
-| DLPC   | 1,2-dilauroil-sn-glicero-3-fosfocolina                   |
-| DMPC   | 1,2-dimiristoil-sn-glicero-3-fosfocolina                 |
-| DSPC   | 1,2-distearoil-sn-glicero-3-fosfocolina                  |
-| DOPC   | 1,2-dioleoil-sn-glicero-3-fosfocolina                    |
-| POPS   | 1-palmitoil-2-oleoil-sn-glicero-3-fosfoserina            |
-| POPG   | 1-palmitoil-2-oleoil-sn-glicero-3-fosfoglicerol          |
-| CHOL   | Colesterol                                               |
+| **Código** | **Nome Completo**                              |
+|------------|------------------------------------------------|
+| POPC       | 1-palmitoil-2-oleoil-sn-glicero-3-fosfocolina   |
+| POPE       | 1-palmitoil-2-oleoil-sn-glicero-3-fosfoetanolamina |
+| DLPC       | 1,2-dilauroil-sn-glicero-3-fosfocolina          |
+| DLPE       | 1,2-dilauroil-sn-glicero-3-fosfoetanolamina     |
+| DMPC       | 1,2-dimiristoil-sn-glicero-3-fosfocolina        |
+| DOPC       | 1,2-dioleoil-sn-glicero-3-fosfocolina           |
+| DPPC       | 1,2-dipalmitoil-sn-glicero-3-fosfocolina        |
+
 
 ## ℹ️ Esses lipídios estão disponíveis no campo de força amber14/lipid17.xml do OpenMM.
 
