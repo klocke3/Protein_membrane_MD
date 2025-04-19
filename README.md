@@ -30,12 +30,9 @@ Argumentos:
 ---
 
 ## Flag	Descrição	Exemplo
--i	Arquivo .pdb da proteína	-i aquaporina.pdb
--l	Tipo de lipídio	-l POPC
--m	Padding mínimo (nm)	-m 3.0
--c	Força iônica (mol/L)	-c 0.15
-
-
+```
+python membrane_preparation.py -i aquaporina.pdb -l POPC -m 3.0 -c 0.15
+```
 ## 🧫 Tipos de Lipídios Suportados
 
 Código	Nome Completo
