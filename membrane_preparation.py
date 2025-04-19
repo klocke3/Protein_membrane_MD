@@ -1,3 +1,5 @@
+!pip install openmm
+
 from openmm.app import PDBFile, Modeller, ForceField, Simulation
 from openmm import unit
 from openmm import app
