@@ -16,7 +16,7 @@ def loading_animation(step_name, steps_total, delay=0.5):
 # Argumentos CLI
 parser = argparse.ArgumentParser(description="Prepara uma proteína em membrana com OpenMM.")
 parser.add_argument('-i', '--input', required=True, help='Arquivo PDB da proteína de entrada')
-parser.add_argument('-l', '--lipid', default='POPC', help='Tipo de lipídio (ex: POPC, DPPC)')
+parser.add_argument('-l', '--lipid', default='DPPC', help='Tipo de lipídio (ex: POPC, DPPC)')
 parser.add_argument('-m', '--minimumPadding', type=float, default=1.0, help='Distância mínima (nm) entre proteína e membrana')
 parser.add_argument('-c', '--ionicStrength', type=float, default=0.15, help='Força iônica (mol/L)')
 args = parser.parse_args()
