@@ -1,4 +1,4 @@
-!pip install git+https://github.com/openmm/pdbfixer.git
+pip install git+https://github.com/openmm/pdbfixer.git
 
 #@title 📦 Instalar PDBFixer no Google Colab
 
