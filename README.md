@@ -28,7 +28,7 @@ pip install openmm
 ## Como usar
 Faça o donwload do arquivo membrane_preparation.py. Execute o comando abaixo na mesma pasta que contém o arquivo pdb da proteína:
 ```bash
-python membrane_preparation.py -i proteina.pdb -l LIPIDIO -m PADDING -c IONIC_STRENGTH
+python membrane_preparation.py -i PROTEIN -l LIPIDIO -m PADDING -c IONIC_STRENGTH
 ```
 ---
 
@@ -36,10 +36,10 @@ Argumentos:
 
 | Parâmetro       | Valor                 |
 |----------------|------------------------|
-| -i Proteína       | arquivo_input.pdb        |
-| -l Lipídio        | Código Lipídeo         |
-| -m Padding        | Ajuste tamanho da membrana nm |
-| -c Força Iônica   | Força iônica mol/L |
+| -i [PROTEIN]       | Arquivo proteína pdb        |
+| -l [LIPID]       | Código lipídeo         |
+| -m [PADDING]        | Ajuste tamanho da membrana (nm) |
+| -c [IONIC_STRENGTH]   | Força iônica (mol/L) |
 
 ---
 
