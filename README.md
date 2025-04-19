@@ -22,10 +22,9 @@ pip install openmm
 ---
 
 ## Como usar
-bash
-Copiar
-Editar
+```bash
 python membrane_preparation.py -i proteina.pdb -l LIPIDIO -m PADDING -c IONIC_STRENGTH
+```
 Argumentos:
 
 ---
