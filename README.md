@@ -18,3 +18,7 @@ Você pode instalar o OpenMM com:
 
 ```bash
 pip install openmm
+
+## Exemplo:
+```bash
+python membrane_preparation.py -i entrada.pdb -l LIPID -m PADDING -c IONIC
