@@ -28,59 +28,39 @@ progress_bar() {
 
 # Lista de pacotes a instalar
 packages=(
-  "PeptideBuilder"
-  "py3Dmol"
-  "MDAnalysis"
-  "libstdc++6"
-  "Miniconda3"
-  "Openff-toolkit"
-  "Openmm-Forcefields"
-  "Mdtraj"
-  "Plotly"
+  "Conda"
+  "OpenMM"
+  "Ploty"
   "Kaleido"
-  "Pdb2Pqr"
-  "PDBfixer"
+  "MDTraj"
+  "py3Dmol"
+  "bipython"
 )
 
 # Função para determinar o comando de instalação de acordo com o pacote
 get_install_command() {
     local package_name=$1
     case $package_name in
-        "PeptideBuilder")
-            echo "pip install biopython -q >/dev/null 2>&1 && pip install git+https://github.com/mtien/PeptideBuilder.git -q >/dev/null 2>&1"
+        "Conda")
+            echo "pip install -q condacolab >/dev/null 2>&1 && import condacolab && condacolab.install() 2>&1"
             ;;
-        "py3Dmol")
-            echo "pip install py3Dmol -q >/dev/null 2>&1"
+        "OpenMM")
+            echo "conda install conda-forge::openmm -q >/dev/null 2>&1"
             ;;
-        "MDAnalysis")
-            echo "pip install --upgrade MDAnalysis -q >/dev/null 2>&1"
-            ;;
-        "libstdc++6")
-            echo "sudo apt-get install -y libstdc++6 -q >/dev/null 2>&1"
-            ;;
-        "Miniconda3")
-            echo "wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local >/dev/null 2>&1"
-            ;;
-        "Openff-toolkit")
-            echo "conda install -c conda-forge openff-toolkit -y -q >/dev/null 2>&1"
-            ;;
-        "Openmm-Forcefields")
-            echo "conda install -c conda-forge openmmforcefields -y -q >/dev/null 2>&1"
-            ;;
-        "Mdtraj")
-            echo "conda install -c conda-forge mdtraj -y -q >/dev/null 2>&1"
-            ;;
-        "Plotly")
+        "Ploty")
             echo "conda install -c plotly plotly -y -q >/dev/null 2>&1"
             ;;
         "Kaleido")
             echo "pip install -U kaleido -q >/dev/null 2>&1"
             ;;
-        "Pdb2Pqr")
-            echo "conda install -c conda-forge pdb2pqr -y -q >/dev/null 2>&1"
+        "MDTraj")
+            echo "conda install -c conda-forge mdtraj -q >/dev/null 2>&1"
             ;;
-        "PDBfixer")
-            echo "conda install -c conda-forge pdbfixer -y -q >/dev/null 2>&1"
+        "py3Dmol")
+            echo "pip install py3Dmol -q >/dev/null 2>&1"
+            ;;
+        "bipython")
+            echo "pip install biopython -q >/dev/null 2>&1"
             ;;
         *)
             echo "echo 'Comando desconhecido para $package_name'"
