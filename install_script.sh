@@ -42,7 +42,7 @@ get_install_command() {
     local package_name=$1
     case $package_name in
         "Conda")
-            echo "pip install -q condacolab >/dev/null 2>&1 && import condacolab && condacolab.install() 2>&1"
+            echo "pip install -q condacolab >/dev/null 2>&1 && python3 -c 'import condacolab; condacolab.install()'"
             ;;
         "OpenMM")
             echo "conda install conda-forge::openmm -q >/dev/null 2>&1"
